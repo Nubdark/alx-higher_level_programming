@@ -26,21 +26,21 @@ class Node:
         self.__data = value
 
     @property
-    def nxt_node(self):
-        """get nxt_node attribute
+    def next_node(self):
+        """get next_node attribute
         Returns: next node
         """
 
-        return (self.__nxt_node)
+        return (self.__next_node)
 
-    @nxt_node.setter
-    def nxt_node(self, value):
+    @next_node.setter
+    def next_node(self, value):
         """set value of next node"""
 
         if (value is not None and not isinstance(value, Node)):
-            raise TypeError('nxt_node must be a Node object')
+            raise TypeError('next_node must be a Node object')
 
-        self.__nxt_node = value
+        self.__next_node = value
 
 
 class SinglyLinkedList:
@@ -55,10 +55,10 @@ class SinglyLinkedList:
         """make list printable"""
 
         printsll = ""
-        locn = self.head
-        while locn:
-            printsll += str(locn.data) + "\n"
-            locn = locn.nxt_node
+        location = self.head
+        while location:
+            printsll += str(location.data) + "\n"
+            location = location.next_node
         return printsll[:-1]
 
     def sorted_insert(self, value):
@@ -74,9 +74,9 @@ class SinglyLinkedList:
             new.next_node = self.head
             self.head = new
             return
-        locn = self.head
-        while locn.nxt_node and locn.nxt_node.data < value:
-            locn = locn.nxt_node
-        if locn.nxt_node:
-            new.nxt_node = locn.nxt_node
-        locn.nxt_node = new
+        location = self.head
+        while location.next_node and location.next_node.data < value:
+            location = location.next_node
+        if location.next_node:
+            new.next_node = location.next_node
+        location.next_node = new
