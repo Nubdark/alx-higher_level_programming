@@ -21,14 +21,14 @@ void print_python_list(PyObject *p) {
     printf("[*] Allocated = %ld\n", ((PyListObject *)p)->allocated);
 
     for (i = 0; i < size; i++) {
-        PyObject *item = PyList_GetItem(p, i);
+        PyObject *item = PyList_GET_ITEM(p, i);
         const char *typeName = item->ob_type->tp_name;
         printf("Element %ld: %s\n", i, typeName);
     }
 }
 
 /**
- * print_python_bytes - Prints bytes information
+ * prints bytes information
  *
  * @p: Python Object
  * Return: no return
