@@ -13,7 +13,7 @@ void print_python_list(PyObject *p) {
         return;
     }
 
-    Py_ssize_t size = PyList_Size(p);
+    Py_ssize_t size = PyObject_Length(p);
     Py_ssize_t i;
 
     printf("[*] Python list info\n");
@@ -22,7 +22,7 @@ void print_python_list(PyObject *p) {
 
     for (i = 0; i < size; i++) {
         PyObject *item = PyList_GetItem(p, i);
-        const char *typeName = Py_TYPE(item)->tp_name;
+        const char *typeName = item->ob_type->tp_name;
         printf("Element %ld: %s\n", i, typeName);
     }
 }
@@ -39,7 +39,7 @@ void print_python_bytes(PyObject *p) {
         return;
     }
 
-    Py_ssize_t size = PyBytes_Size(p);
+    Py_ssize_t size = PyObject_Length(p);
     Py_ssize_t i;
 
     printf("[*] Python bytes info\n");
@@ -50,7 +50,8 @@ void print_python_bytes(PyObject *p) {
     Py_ssize_t numBytes = size < 10 ? size : 10;
 
     for (i = 0; i < numBytes; i++) {
-        printf("%02x", (unsigned char)PyBytes_AS_STRING(p)[i]);
+        unsigned char byte = ((unsigned char *)PyBytes_AS_STRING(p))[i];
+        printf("%02x", byte);
     }
     printf("\n");
 }
